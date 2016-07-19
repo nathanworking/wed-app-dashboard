@@ -1,0 +1,34 @@
+/// Took "candy" theme from toggle switch and made it my own with a new name
+/////// Theme styles only - specific edits are in _charts.scss
+.switch-toggle.switch-app,
+.switch-light.switch-app > span {
+  background-color: lighten($site-base-primary-color, 58%); // Switch background
+  border-radius: 100px;
+  border: 2px solid lighten($site-base-primary-color, 40%);
+}
+
+.switch-light.switch-app span span,
+.switch-light.switch-app input:checked ~ span span:first-child,
+.switch-toggle.switch-app label {
+  color: $site-base-primary-color;
+  font-weight: bold;
+  text-align: center;
+}
+.switch-light:focus *{
+    outline: none;
+  }
+
+.switch-light.switch-app input ~ span span:first-child,
+.switch-light.switch-app input:checked ~ span span:nth-child(2),
+.switch-app input:checked + label {
+  color: $site-base-light-color; // Active switch color
+}
+.switch-app a {
+  border: 1px solid $site-base-primary-color;
+  border-radius: 100px;
+  color: $site-base-light-color;
+  background-color: $site-base-highlight-color; // Active switch BG
+}
+.switch-app a:focus {
+    outline: none;
+  }

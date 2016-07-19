@@ -1,0 +1,58 @@
+// Document
+  $tablet-width: 768px;
+  $desktop-width: 1024px;
+
+//---------- Colors //
+
+    // Base Palette
+      $site-base-light-color: #FFFFFF;      // Main BG Color
+      $site-base-primary-color: #666666;    // Main Font Color
+      $site-base-highlight-color: #7378BA;  // Hightlights
+
+        $site-alt-highlight-color: #81C98F; // Alt Hightlight Color
+        $site-alt-primary-color: #4D4D6F;   // Alt Base Color
+
+    // Chart Palette
+      $chart-base-color: #7378BA;      // Main Chart Color
+      $chart-secondary-color: #91C694; // Secondary Chart Color
+      $chart-alt-color: #81B0BD;       // Alternative Chart Color
+
+// Colors -------------//
+
+// Font Sizes
+  $standard-text: 18px;  // Overall font size
+  $small-text: 1em; // Small font size
+  $mid-text: 1.5em; // Mid font size
+  $title-text: 2em; // Title font size
+
+// Video Element
+  $max-video-width: 1080px;
+
+// Navigation
+  $nav-height: 85px; // Because it must be matching in multiple places
+  $mobile-nav-height: 155px; // Because it must be matching in multiple places
+
+
+
+
+
+
+  // nav colors
+  $color-1: #83b0b9; // Neptune
+  $color-2: #d35657; // Chestnut Rose
+  $color-3: #343943; // Tuna
+  $color-4: #e4b162; // Equator
+
+  $color-5: #131519; // Woodsmoke
+  $color-6: #ffffff; // White
+
+  // nav fonts
+  $primary-font: 'Roboto', sans-serif;
+
+  // side navigation size
+  $nav-width-small: 74px;
+  $nav-width-normal: 94px;
+  $loading-bar-width: 4px;
+
+  //animation
+  $animation-duration: 0.5s;

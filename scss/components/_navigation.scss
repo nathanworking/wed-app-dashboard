@@ -1,0 +1,414 @@
+/* --------------------------------
+
+Mobile Navigation -- 480px & Down
+
+-------------------------------- */
+	.cd-side-navigation {
+		display: none;
+	}
+
+	.cd-section.visible {
+		padding: 0;
+	}
+
+	/* --------------------------------
+	Main Components
+	-------------------------------- */
+	main {
+		position: relative;
+		z-index: 2;
+
+		/* fix bug on iOS */
+		height: 100vh;
+		overflow-y: auto;
+
+		/* Force Hardware Acceleration in WebKit */
+		@include transform(translateZ(0));
+		-webkit-backface-visibility: hidden;
+		backface-visibility: hidden;
+
+		@include transition(transform $animation-duration);
+		@include transition-timing-function(cubic-bezier(.91,.01,.6,.99));
+
+		.navigation-is-open & {
+			@include transform(translateX(100%));
+			display: none;
+		}
+	}
+	.cd-nav-trigger {
+		position: fixed;
+		z-index: 200;
+		left: 5%;
+		top: ($mobile-nav-height - 65px );
+		height: 54px;
+		width: 54px;
+		background-color: $site-base-light-color;
+		border-radius: 50%;
+
+		/* image replacement */
+		overflow: hidden;
+		text-indent: 100%;
+		white-space: nowrap;
+
+		@include transition(transform $animation-duration - 0.4s);
+
+		.cd-nav-icon {
+			position: absolute;
+			@include center;
+			width: 22px;
+			height: 2px;
+			background-color: $site-base-primary-color;
+
+			&::before, &:after {
+				/* upper and lower lines of the menu icon */
+				content: '';
+				position: absolute;
+				top: 0;
+				right: 0;
+				width: 100%;
+				height: 100%;
+				background-color: inherit;
+
+				/* Force Hardware Acceleration in WebKit */
+				@include transform(translateZ(0));
+				-webkit-backface-visibility: hidden;
+				backface-visibility: hidden;
+
+				@include transition(transform $animation-duration - 0.2s, width $animation-duration - 0.2s, top .3s);
+			}
+
+			&::before {
+				@include transform-origin(right top);
+				@include transform(translateY(-6px));
+			}
+
+			&::after {
+				@include transform-origin(right bottom);
+				@include transform(translateY(6px));
+			}
+		}
+
+		.no-touch &:hover .cd-nav-icon::after {
+			top: 2px;
+		}
+
+		.no-touch &:hover .cd-nav-icon::before {
+			top: -2px;
+		}
+
+		svg {
+			position: absolute;
+			top: 0;
+			left: 0;
+		}
+
+		circle {
+			/* circle border animation */
+			@include transition(stroke-dashoffset $animation-duration - 0.3s 0s);
+		}
+
+		.navigation-is-open & {
+			/* rotate trigger when navigation becomes visible */
+			@include transform(rotate(180deg));
+
+			.cd-nav-icon::after,
+			.cd-nav-icon::before {
+				/* animate arrow --> from hamburger to arrow */
+				width: 50%;
+				@include transition(transform $animation-duration - 0.2s, width $animation-duration - 0.2s);
+			}
+
+			.cd-nav-icon::before {
+				@include transform(rotate(45deg));
+			}
+
+			.cd-nav-icon::after {
+				@include transform(rotate(-45deg));
+			}
+
+			.no-touch &:hover .cd-nav-icon::after,
+			.no-touch &:hover .cd-nav-icon::before {
+				top: 0;
+			}
+
+			circle {
+				stroke-dashoffset: 0;
+				@include transition(stroke-dashoffset $animation-duration - 0.3s 0.3s);
+			}
+		}
+
+	}
+
+	.cd-nav {
+		position: fixed;
+		z-index: 20;
+		top: 0;
+		left: 0;
+		height: 100%;
+		width: 100%;
+		background-color: $site-alt-primary-color;
+		visibility: hidden;
+		@include transition(visibility 0s $animation-duration);
+
+		.cd-navigation-wrapper {
+			/* all navigation content */
+			height: 100%;
+			overflow-y: auto;
+			-webkit-overflow-scrolling: touch;
+
+			/* Force Hardware Acceleration in WebKit */
+			@include transform(translateZ(0));
+			-webkit-backface-visibility: hidden;
+			backface-visibility: hidden;
+
+			@include transform(translateX(-50%));
+			@include transition(transform $animation-duration);
+			@include transition-timing-function(cubic-bezier(.86,.01,.77,.78));
+		}
+
+		.navigation-is-open & {
+			visibility: visible;
+			@include transition(visibility 0s 0s);
+
+			.cd-navigation-wrapper {
+				@include transform(translateX(0));
+				@include transition(transform $animation-duration - 0.2s);
+				@include transition-timing-function(cubic-bezier(.82,.01,.77,.78));
+			}
+		}
+
+		.cd-primary-nav {
+			margin-top: ($mobile-nav-height + 25px);
+			margin-left: ($mobile-nav-height - 155px);
+
+			svg {
+				height: 37px;
+				margin-left: 1.25em;
+				margin-right: 0.25em;
+				opacity: 0.5;
+
+			}
+				a.selected svg{
+					opacity: 1;
+				}
+
+			li {
+				line-height: 2;
+				text-align: left;
+			}
+
+
+			a {
+				@extend %LightFont;
+				text-transform: capitalize;
+				font-size: 2.4rem;
+				color: $site-base-light-color;
+				opacity: 0.5;
+				text-decoration: none;
+
+				&.selected {
+					color: $site-base-light-color;
+					opacity: 1;
+				}
+				&.selected::before {
+	 						content: '';
+	 						position: absolute;
+	 						left: -28px;
+	 						/* top: 0; */
+	 						margin-top: 5px;
+	 						/* bottom: -20px; */
+	 						height: 50px;
+	 						border-radius: 1000px;
+	 						width: 50px;
+	 						background-color: #85DB81;
+	 					}
+
+
+				.no-touch &:hover {
+					color: $site-base-light-color;
+					opacity: 1;
+				}
+			}
+		}
+
+	}
+
+	.no-js .cd-nav {
+		position: static;
+		visibility: visible;
+
+		.cd-navigation-wrapper {
+			height: auto;
+			overflow: visible;
+			padding: 100px 5%;
+			@include transform(translateX(0));
+		}
+	}
+
+
+
+
+
+
+/* --------------------------------
+
+Primary Navigation -- 480px & Up
+
+-------------------------------- */
+
+// Things to hide & change for larger Nav
+	@include MQ(S) {
+			.cd-section.visible {
+			padding-left: 70px;
+		}
+			.cd-nav-trigger {
+				display: none;
+			}
+			.cd-nav {
+				display: none;
+			}
+	}
+
+.cd-side-navigation {
+	position: fixed;
+	z-index: 3;
+	top: auto;
+	left: 0;
+	height: 100vh;
+	width: $nav-width-small;
+	overflow: hidden;
+
+	&::before {
+		/* background color of the side navigation */
+		content: '';
+		position: absolute;
+		top: 0;
+		left: 0;
+		height: 100%;
+		@include calc(width, "100% - #{$loading-bar-width}");
+		background-color: $site-alt-primary-color;
+	}
+
+	ul {
+		height: 100%;
+		overflow-y: auto;
+		-webkit-overflow-scrolling: touch;
+	}
+
+	li {
+		@include calc(width, "100% - #{$loading-bar-width}");
+		max-height: 100px;
+	}
+
+	a {
+		display: block;
+		position: relative;
+		text-align: center;
+		max-height: 100px;
+
+		&.selected svg {
+			opacity: 1;
+		}
+
+		&:hover svg {
+			opacity: 1;
+		}
+
+		svg {
+			/* this is the icon */
+			position: absolute;
+			@include center(x);
+			top: 1.3em;
+			opacity: 0.5;
+			width: 35px;
+			transition: opacity 0.4s;
+
+			* {
+				@include transition(stroke 0.2s);
+			}
+		}
+
+		&::after {
+			@include hightlight;
+			opacity: 0;
+			transition: all 0.6s;
+		}
+
+		&.selected::after {
+				@include hightlight;
+				opacity: 1;
+			}
+
+
+		.no-touch &:hover {
+			fill: lighten($site-base-light-color, 50%);
+
+			&::after {
+				opacity: 1;
+			}
+		}
+
+		&.selected, .no-touch &.selected:hover {
+			background-color: transparent;
+
+			> svg * {
+				fill: #FFFFFF;
+			}
+		}
+	}
+
+
+	@include MQ(S) {
+		width: $nav-width-normal;
+		display: block;
+
+		a {
+			padding: 4em 0 1.5em;
+			height: 90px;
+
+			svg {
+				top: 1.6em;
+			}
+		}
+	}
+}
+
+/* --------------------------------
+ Loading Bar
+-------------------------------- */
+
+#cd-loading-bar {
+	position: fixed;
+	z-index: 2;
+	left: $nav-width-small - $loading-bar-width;
+	width: $loading-bar-width;
+	visibility: hidden;
+
+	/* Force Hardware Acceleration */
+	@include backface-visibility(hidden);
+	@include transform(translateZ(0));
+
+	&.index {
+		background-color: $site-alt-highlight-color;
+	}
+
+	&.members {
+		background-color: $color-2;
+	}
+
+	&.visits {
+		background-color: $color-3;
+	}
+
+	&.settings {
+		background-color: $color-4;
+	}
+
+	&.loading {
+		visibility: visible;
+	}
+
+	@include MQ(S) {
+		left: $nav-width-normal - $loading-bar-width;
+	}
+}

@@ -1,0 +1,167 @@
+
+header {
+  width: 100%;
+  height: $mobile-nav-height;
+  position: fixed;
+  display: block;
+  z-index: 100;
+  padding: 15px 0 0 0;
+  background-color: $site-base-highlight-color;
+  color: $site-base-light-color;
+    @include MQ(S) {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+    }
+  & h1 {
+    font-size: $mid-text;
+    font-weight: 300;
+    margin-top: 0.5em;
+      & span {
+        font-weight: 400;
+      }
+      @include MQ(S) {
+        text-align: left;
+        margin-left: 1em;
+      }
+    }
+    & .group {
+      min-width: 400px;
+    }
+	}
+.seperator::after {
+  content: '';
+  height: 40px;
+  width: 2px;
+  float: none;
+  position: fixed;
+  right: 21.2em;
+  margin-top: 5px;
+  border-radius: 100px;
+  background-color: darken($site-base-highlight-color, 8%);
+  display: none;
+  @include MQ(S) {
+    display: block;
+  }
+}
+
+.profile-icon {
+  width: 54px;
+  height: 54px;
+  position: absolute;
+  top: ($mobile-nav-height - 70px );
+  @include center(x);
+  @include MQ(S) {
+    display: flex;
+    position: relative;
+    top: 0;
+    left: 0;
+    float: left;
+  }
+}
+
+  .profile-text {
+    @extend %LightFont;
+    font-size: $mid-text;
+    line-height: 2.25em;
+    padding: 0 25px 0 0;
+    display: none; // Hide just the text on mobile
+      @include MQ(S) { // Show again
+        display: flex;
+      }
+  }
+
+.fillerDiv {
+  height: $mobile-nav-height;
+}
+
+@include MQ(S) {
+  header,
+  .fillerDiv {
+    height: $nav-height;
+  }
+}
+
+.alert-icon {
+  display: flex;
+  width: 54px;
+  height: 54px;
+  padding: 12px;
+  float: left;
+  position: absolute;
+  top: ($mobile-nav-height - 65px );
+  right: 0;
+  margin-right: 1em;
+  background: url(../img/icons/icon-bell.svg) no-repeat center;
+  background-size: 25px;
+  border-radius: 100px;
+  background-color: darken($site-base-highlight-color, 8%);
+  @include MQ(S) {
+    position: initial;
+    top: 0;
+    left: 0;
+    margin-right: 3em;
+    background: url(../img/icons/icon-bell.svg) no-repeat center;
+    background-size: 25px;
+    background-color: transparent;
+  }
+}
+
+.new-alert:after {
+  content: '';
+  height: 10px;
+  width: 10px;
+  float: none;
+  position: fixed;
+  right: 20px;
+  margin-top: -10px;
+  border-radius: 100px;
+  background-color: $site-alt-highlight-color;
+  display: block;
+  transition: all 0.3s;
+  @include MQ(S) {
+    content: '';
+    height: 10px;
+    width: 10px;
+    float: none;
+    right: auto;
+    position: fixed;
+    margin-top: -1px;
+    margin-left: 26px;
+    background-color: $site-alt-highlight-color;
+  }
+}
+
+.tooltipster-box {
+  background: $site-base-light-color;
+  min-width: 300px;
+  color: $site-alt-primary-color;
+  padding: 15px;
+  text-align: left;
+  border-radius: 5px;
+  box-shadow: 0px 0px 39px 5px rgba(153,153,153,0.12);
+  a {
+    text-decoration: none;
+  }
+  h1 {
+    font-size: ($title-text - 0.65em);
+    margin: 0.25em 0 1em 0;
+  }
+  li {
+    background: darken($site-base-light-color, 5%);
+    font-size: $small-text;
+    padding: 1em 1em;
+    margin: 0.5em 0;
+    transition: all 0.4s;
+    border-radius: 5px;
+    color: $site-alt-primary-color;
+    &:hover {
+      background: $site-base-highlight-color;
+      color: $site-base-light-color;
+      cursor: pointer;
+    }
+    &:hover a{
+      color: $site-base-light-color;
+    }
+  }
+}
